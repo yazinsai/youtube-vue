@@ -3639,12 +3639,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b92573c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/YoutubeVue.vue?vue&type=template&id=0c232272&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b92573c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/YoutubeVue.vue?vue&type=template&id=e8e7cdbe&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"player",attrs:{"id":_vm.playerid}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/YoutubeVue.vue?vue&type=template&id=0c232272&
+// CONCATENATED MODULE: ./src/components/YoutubeVue.vue?vue&type=template&id=e8e7cdbe&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
 var es_number_constructor = __webpack_require__("a9e3");
@@ -3711,6 +3711,10 @@ var shortid_default = /*#__PURE__*/__webpack_require__.n(shortid);
       validator: function validator(v) {
         return Number(v) === 0 || Number(v) === 1;
       }
+    },
+    annotations: {
+      type: Boolean,
+      default: true
     }
   },
   data: function data() {
@@ -3730,7 +3734,8 @@ var shortid_default = /*#__PURE__*/__webpack_require__.n(shortid);
       loop: this.loop,
       controls: this.controls,
       modestbranding: this.modestbranding,
-      playlist: this.video_id
+      playlist: this.video_id,
+      iv_load_policy: this.annotations ? 1 : 3
     };
     this.player = dist_default()(this.playerid, {
       host: "https://www.youtube.com",
@@ -3746,6 +3751,8 @@ var shortid_default = /*#__PURE__*/__webpack_require__.n(shortid);
         _this.$emit("paused");
       } else if (e.data === window.YT.PlayerState.PLAYING) {
         _this.$emit("played");
+
+        _this.player.setPlaybackRate(_this.speed);
       }
     });
     this.player.on("playbackRateChange", function (e) {

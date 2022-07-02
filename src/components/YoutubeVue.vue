@@ -17,6 +17,7 @@ export default {
     speed: { type: Number, default: 1 },
     controls: { type: Number, default: 0, validator: (v) => Number(v) === 0 || Number(v) === 1 },
     modestbranding: { type: Number, default: 1, validator: (v) => Number(v) === 0 || Number(v) === 1 },
+    annotations: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -34,6 +35,7 @@ export default {
       controls: this.controls,
       modestbranding: this.modestbranding,
       playlist: this.video_id,
+      iv_load_policy: this.annotations ? 1 : 3,
     };
     this.player = YouTubePlayer(this.playerid, {
       host: "https://www.youtube.com",
@@ -49,6 +51,7 @@ export default {
         this.$emit("paused");
       } else if (e.data === window.YT.PlayerState.PLAYING) {
         this.$emit("played");
+        this.player.setPlaybackRate(this.speed);
       }
     });
     this.player.on("playbackRateChange", (e) => {
